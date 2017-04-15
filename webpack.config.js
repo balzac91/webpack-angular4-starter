@@ -42,6 +42,12 @@ module.exports = function () {
         }],
         fallback: 'style-loader'
       })
+    }, {
+      test: /\.(png|jpg|gif|svg|ico)$/,
+      loader: 'file-loader',
+      options: {
+        name: 'images/[name].[hash].[ext]'
+      }
     }]
     // {
     //   test: /\.ts$/,
@@ -88,6 +94,16 @@ module.exports = function () {
   } else {
     config.devtool = 'cheap-module-source-map';
   }
+
+  /**
+   * resolve
+   */
+  config.resolve = {
+    alias: {
+      styles: path.resolve('src/styles'),
+      assets: path.resolve('src/assets')
+    }
+  };
 
   /**
    * devServer
