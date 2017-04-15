@@ -1,10 +1,17 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = function () {
   const isBuild = process.env.npm_lifecycle_event === 'build';
+
+  const extractSass = new ExtractTextPlugin({
+    filename: '[name].[hash].css'
+  });
 
   const config = {};
 
@@ -16,11 +23,22 @@ module.exports = function () {
   };
 
   config.module = {
-    // rules: [{
+    rules: [{
+      test: /\.(scss|css)$/,
+      use: extractSass.extract({
+        use: [{
+          loader: 'css-loader'
+        }, {
+          loader: 'sass-loader'
+        }],
+        fallback: 'style-loader'
+      })
+    }]
+    // {
     //   test: /\.ts$/,
     //   exclude: /node_modules/,
     //   loader: 'tslint-loader'
-    // }]
+    // }
   };
 
   config.plugins = [];
@@ -29,16 +47,21 @@ module.exports = function () {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
+    extractSass,
     new ProgressBarPlugin()
   );
 
+  if (isBuild) {
+    config.plugins.push(
+      new CleanWebpackPlugin(['dist'])
+    );
+  }
 
   if (!isBuild) {
     config.devtool = 'eval-source-map';
   } else {
     config.devtool = 'cheap-module-source-map';
   }
-
 
   if (!isBuild) {
     config.plugins.push(

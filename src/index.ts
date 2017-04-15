@@ -1,3 +1,3 @@
-console.log('Hello world!');
+import './styles/style.scss';
 
-console.log('Hello world 2!');
+console.log('Hello world!');
