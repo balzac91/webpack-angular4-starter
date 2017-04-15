@@ -10,7 +10,7 @@ module.exports = function () {
   const isBuild = process.env.npm_lifecycle_event === 'build';
 
   const extractSass = new ExtractTextPlugin({
-    filename: '[name].[hash].css'
+    filename: 'styles.[hash].css'
   });
 
   const config = {};
@@ -24,7 +24,7 @@ module.exports = function () {
    * output
    */
   config.output = {
-    filename: '[name].[hash].js',
+    filename: 'app.[hash].js',
     path: path.resolve(__dirname, 'dist')
   };
 
