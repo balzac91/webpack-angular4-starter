@@ -15,6 +15,14 @@ module.exports = function () {
     path: path.resolve(__dirname, 'dist')
   };
 
+  config.module = {
+    // rules: [{
+    //   test: /\.ts$/,
+    //   exclude: /node_modules/,
+    //   loader: 'tslint-loader'
+    // }]
+  };
+
   config.plugins = [];
 
   config.plugins.push(
