@@ -15,13 +15,22 @@ module.exports = function () {
 
   const config = {};
 
+  /**
+   * entry
+   */
   config.entry = './src/index.ts';
 
+  /**
+   * output
+   */
   config.output = {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist')
   };
 
+  /**
+   * module
+   */
   config.module = {
     rules: [{
       test: /\.(scss|css)$/,
@@ -41,6 +50,9 @@ module.exports = function () {
     // }
   };
 
+  /**
+   * plugins
+   */
   config.plugins = [];
 
   config.plugins.push(
@@ -50,18 +62,6 @@ module.exports = function () {
     extractSass,
     new ProgressBarPlugin()
   );
-
-  if (isBuild) {
-    config.plugins.push(
-      new CleanWebpackPlugin(['dist'])
-    );
-  }
-
-  if (!isBuild) {
-    config.devtool = 'eval-source-map';
-  } else {
-    config.devtool = 'cheap-module-source-map';
-  }
 
   if (!isBuild) {
     config.plugins.push(
@@ -74,6 +74,24 @@ module.exports = function () {
     );
   }
 
+  if (isBuild) {
+    config.plugins.push(
+      new CleanWebpackPlugin(['dist'])
+    );
+  }
+
+  /**
+   * devtool
+   */
+  if (!isBuild) {
+    config.devtool = 'eval-source-map';
+  } else {
+    config.devtool = 'cheap-module-source-map';
+  }
+
+  /**
+   * devServer
+   */
   if (!isBuild) {
     config.devServer = {
       contentBase: path.join(__dirname, 'src'),
