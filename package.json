@@ -5,9 +5,11 @@
   "author": "Kamil Fus <balzac91@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "webpack-dev-server",
     "build": "webpack"
   },
   "devDependencies": {
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
   }
 }
