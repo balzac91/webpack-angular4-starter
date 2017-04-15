@@ -4,6 +4,9 @@
   "repository": "https://github.com/balzac91/webpack-angular4-starter.git",
   "author": "Kamil Fus <balzac91@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
   "devDependencies": {
     "webpack": "^2.4.1"
   }
