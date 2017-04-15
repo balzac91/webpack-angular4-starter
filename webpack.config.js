@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -28,6 +29,18 @@ module.exports = function () {
     config.devtool = 'eval-source-map';
   } else {
     config.devtool = 'cheap-module-source-map';
+  }
+
+
+  if (!isBuild) {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development')
+        },
+        __prod: false
+      })
+    );
   }
 
   if (!isBuild) {
