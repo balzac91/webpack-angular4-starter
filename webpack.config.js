@@ -8,7 +8,7 @@ module.exports = function () {
 
   const config = {};
 
-  config.entry = './src/index.js';
+  config.entry = './src/index.ts';
 
   config.output = {
     filename: '[name].[hash].js',
