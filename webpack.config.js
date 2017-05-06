@@ -37,9 +37,13 @@ module.exports = function () {
       test: /\.(scss|css)$/,
       use: extractSass.extract({
         use: [{
-          loader: 'css-loader'
+          loader: 'css-loader', options: {
+            sourceMap: !isBuild
+          }
         }, {
-          loader: 'sass-loader'
+          loader: 'sass-loader', options: {
+            sourceMap: !isBuild
+          }
         }],
         fallback: 'style-loader'
       })
@@ -47,13 +51,13 @@ module.exports = function () {
       test: /\.(png|jpg|jpeg|gif|svg)$/,
       loader: 'file-loader',
       options: {
-        name: 'fonts/[name].[hash].[ext]'
+        name: 'images/[name].[hash].[ext]'
       }
     }, {
       test: /\.(woff|woff2|ttf|eot)$/,
       loader: 'file-loader',
       options: {
-        name: 'images/[name].[hash].[ext]'
+        name: 'fonts/[name].[hash].[ext]'
       }
     }]
     // {
@@ -100,9 +104,7 @@ module.exports = function () {
    * devtool
    */
   if (!isBuild) {
-    config.devtool = 'eval-source-map';
-  } else {
-    config.devtool = 'cheap-module-source-map';
+    config.devtool = 'inline-source-map';
   }
 
   /**
