@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const SassLintPlugin = require('sasslint-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = function () {
   const isBuild = process.env.npm_lifecycle_event === 'build';
@@ -77,10 +77,10 @@ module.exports = function () {
       template: './src/index.html'
     }),
     extractSass,
-    new ProgressBarPlugin(),
-    new SassLintPlugin({
-      context: path.join(__dirname, 'src')
-    })
+    new ProgressBarPlugin()//,
+    // new StyleLintPlugin({
+    //   context: path.join(__dirname, 'src')
+    // })
   );
 
   if (!isBuild) {
