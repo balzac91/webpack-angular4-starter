@@ -59,6 +59,12 @@ module.exports = function () {
       options: {
         name: 'fonts/[name].[hash].[ext]'
       }
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader',
+      options: {
+        minimize: false
+      }
     }]
     // {
     //   test: /\.ts$/,
@@ -77,7 +83,11 @@ module.exports = function () {
       template: './src/index.html'
     }),
     extractSass,
-    new ProgressBarPlugin()//,
+    new ProgressBarPlugin(),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery'
+    })//,
     // new StyleLintPlugin({
     //   context: path.join(__dirname, 'src')
     // })
